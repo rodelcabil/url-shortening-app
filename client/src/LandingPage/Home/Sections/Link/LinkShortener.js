@@ -12,7 +12,7 @@ const LinkShortener = () => {
   const [inputLink, setInputLink] = useState('');
   const [shortLink, setShortLink] = useState('');
   const [isLoading, setLoading] = useState(false);
-  const [isURLValid, setURLValid] = useState(false);
+  const [showResult, setShowResult] = useState(false);
   const [form] = Form.useForm();
 
   let urlPattern = new RegExp('^(https?:\\/\\/)?' + // validate protocol
@@ -28,8 +28,8 @@ const LinkShortener = () => {
       .then((response) => response.json())
       .then((data) => {
         setTimeout(() => {
-          setURLValid(true);
           setShortLink(data.result.short_link);
+          setShowResult(true);
           setLoading(false)
         }, 2000);
 
@@ -65,36 +65,37 @@ const LinkShortener = () => {
             <p className='errorMessage'>{showInvalidURLError ? 'Please enter a valid URL' : ''} </p> */}
           </div>
 
-          <ReusableButton name={ isLoading ? 
+          <ReusableButton name={
             <>
               <Oval
-                height={16}
+                height={15}
                 width={20}
                 color="#3B3054"
                 wrapperStyle={{}}
                 wrapperClass=""
-                visible={true}
+                visible={isLoading ? true : false}
                 ariaLabel='oval-loading'
                 secondaryColor="#3B3054"
-                strokeWidth={5}
+                strokeWidth={10}
                 strokeWidthSecondary={10}
 
-              />&nbsp;<span>Loading</span>
+              />
+              &nbsp;
+              {isLoading ? 'Loading' : 'Shorten It!'}
             </>
-            :
-            'Shorten It!'
+          
           } radius="10px" className="button" fullWidth="true" />
 
         </Form>
       </RowContainer>
-      {isURLValid ?
+      {showResult ?
         <OutputContainer>
           <div className="left-content">
             <p>{inputLink}</p>
           </div>
           <div className="right-content">
             <p>{shortLink}</p>
-            <ReusableCopyButton />
+            <ReusableCopyButton link={shortLink} />
           </div>
         </OutputContainer>
         :

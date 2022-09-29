@@ -11,7 +11,7 @@ const Statistics = () => {
     <StatisticsContainer>
     
         <div className="header-container">
-            <h4>Advance Statistics</h4>
+            <h4>Advanced Statistics</h4>
             <br/>
             <p>Track how your links are performing across the web with our advanced statistics dashboard.</p>
         </div>

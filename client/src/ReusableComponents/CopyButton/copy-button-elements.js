@@ -9,7 +9,7 @@ export const CopyButtonContainer = styled.button`
     align-items: center;
     border-radius: 5px;
     justify-content: center;
-    background: hsl(180, 66%, 49%);
+    background: ${({ isCopied }) => (isCopied ? 'hsl(257, 27%, 26%)' : 'hsl(180, 66%, 49%)')};
     padding: 8px 15px;
     font-size: 16px;
     font-weight: 700;
@@ -18,7 +18,7 @@ export const CopyButtonContainer = styled.button`
     cursor: pointer;
 
     &:hover{
-       background: #80e5e5;
+       background: ${({ isCopied }) => (isCopied ? '#806dab' : '#80e5e5')}; ;
     }
 
      @media screen and (max-width: 600px) {
